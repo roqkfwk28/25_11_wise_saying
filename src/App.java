@@ -3,12 +3,15 @@ import java.util.Scanner;
 class App {
   void run() {
     System.out.println("== 명언 앱 ==");
-    System.out.println("명령) ");
+    while(true){
+      System.out.println("명령) ");
 
-    Scanner scanner = new Scanner(System.in);
+      Scanner scanner = new Scanner(System.in);
 
-    String cmd = scanner.nextLine();
-
-    System.out.printf("입력하신 명령어 : %s\n", cmd);
+      String cmd = scanner.nextLine();
+      if (cmd.equals("종료")){
+        break;
+      }
+    }
   }
 }
