@@ -4,7 +4,7 @@ class App {
   void run() {
     System.out.println("== 명언 앱 ==");
     while(true){
-      System.out.println("명령) ");
+      System.out.printf("명령) ");
 
       Scanner scanner = new Scanner(System.in);
 
@@ -15,11 +15,11 @@ class App {
       else if(cmd.equals("등록")){
         System.out.println("명언: ");
         String content = scanner.nextLine();
+
         System.out.println("작가: ");
         String authorName = scanner.nextLine();
 
-        System.out.printf("명언 : %s\n", content);
-        System.out.printf("작가 : %s\n", authorName);
+        System.out.println("1번 명언이 등록되었습니다.");
       }
     }
   }
