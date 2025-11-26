@@ -6,23 +6,27 @@ class App {
 
     int lastWiseSayingId = 0;
 
-    while(true){
-      System.out.printf("명령) ");
+    while (true) {
+      System.out.print("명령) ");
 
       Scanner scanner = new Scanner(System.in);
 
       String cmd = scanner.nextLine();
-      if (cmd.equals("종료")){
+      if (cmd.equals("종료")) {
         break;
       }
-      else if(cmd.equals("등록")){
-        System.out.println("명언: ");
+      else if (cmd.equals("등록")) {
+        System.out.print("명언 : ");
         String content = scanner.nextLine();
 
-        System.out.println("작가: ");
+        System.out.print("작가 : ");
         String authorName = scanner.nextLine();
 
         lastWiseSayingId++;
+
+        int id = lastWiseSayingId;
+
+        Quotation quotation = new Quotation(id, content, authorName);
 
         System.out.printf("%d번 명언이 등록되었습니다.\n", lastWiseSayingId);
       }
