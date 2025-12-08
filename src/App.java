@@ -20,6 +20,11 @@ class App {
       System.out.print("명령) ");
       String cmd = scanner.nextLine();
 
+      Rq rq = new Rq(cmd);
+
+      System.out.println("rq. getAction : " + rq.getAction());
+      System.out.println("rq. getParamAsInt : " + rq.getParamAsInt("id",0));
+
       if (cmd.equals("종료")) {
         break;
       }
@@ -81,8 +86,7 @@ class App {
     String queryString = cmdBits[1];
 
     String[] queryStringBits = queryString.split("&");
-    //queryStringBits[0] => id = 1
-    //queryStringBits[1] => archive=true
+
     int id = 0;
     for (int i = 0; i < queryStringBits.length; i++) {
       String queryParamStr = queryStringBits[i];
@@ -92,16 +96,16 @@ class App {
       String _paramName = queryParamStrBits[0];
       String paramValue = queryParamStrBits[1];
 
-        if (_paramName.equals(paramName)) {
-          try {
-            // 문제가 없을 경우
-            return Integer.parseInt(paramValue);
-          }catch (NumberFormatException e){
-            //문제가 있을 경우
-            return defaultValue;
-          }
+      if (_paramName.equals(paramName)) {
+        try {
+          // 문제가 없을 경우
+          return Integer.parseInt(paramValue);
+        }catch (NumberFormatException e){
+          //문제가 있을 경우
+          return defaultValue;
         }
       }
-      return defaultValue;
     }
+    return defaultValue;
   }
+}
