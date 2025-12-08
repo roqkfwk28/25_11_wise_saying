@@ -1,21 +1,25 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Rq {
   String cmd;
   String action;
   String queryString;
-  List<String> paramNames;
-  List<String> paramValues;
+  Map<String, String> paramsMap;
 
   Rq(String cmd) {
-    paramNames = new ArrayList<>();
-    paramValues = new ArrayList<>();
+    paramsMap = new HashMap<>();
 
     this.cmd = cmd;
 
     String[] cmdBits = cmd.split("\\?", 2);
     action = cmdBits[0].trim();
+
+    if (cmdBits.length == 1) {
+      return;
+    }
     queryString = cmdBits[1].trim();
 
     String[] queryStringBits = queryString.split("&");
@@ -26,23 +30,21 @@ public class Rq {
       String paramName = queryParamStrBits[0];
       String paramValue = queryParamStrBits[1];
 
-      paramNames.add(paramName);
-      paramValues.add(paramValue);
+      paramsMap.put(paramName,paramValue);
     }
   }
   String getAction(){
     return action;
   }
   public int getParamAsInt(String paramName, int defaultvalue){
-    int index = paramNames.indexOf(paramName);
-    if (index == -1) return defaultvalue;
-
-    String paramValue = paramValues.get(index);
-
-    try {
-      return Integer.parseInt(paramValue);
-    }catch (NumberFormatException e) {
+      String paramValue = paramsMap.get(paramName);
+      if (paramName != null) {
+        try {
+          return Integer.parseInt(paramValue);
+        }catch (NumberFormatException e) {
+          return defaultvalue;
+        }
+      }
       return defaultvalue;
     }
   }
-}
